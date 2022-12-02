@@ -2,6 +2,7 @@ import { createContext, useReducer } from "react";
 const initialValue = {
   isAuthenticated: false,
   user: null,
+  movies: null,
 };
 const LOGIN_SUCCESS = "LOGIN_SUCCSESS";
 const LOGOUT = "LOGOUT";
@@ -25,6 +26,7 @@ function AuthProvider({ children }) {
   const logout = async () => {
     disptach({ type: LOGOUT });
   };
+
   return (
     <AuthContext.Provider value={{ ...state, login, logout }}>
       {children}

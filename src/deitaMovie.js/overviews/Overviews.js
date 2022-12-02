@@ -1,16 +1,10 @@
 import React from "react";
 import ReactPlayer from "react-player";
 
-function Overviews() {
+function Overviews({ movie }) {
   return (
     <div>
-      <p>
-        Tony Stark creates the Ultron Program to protect the world, but when the
-        peacekeeping program becomes hostile, The Avengers go into action to try
-        and defeat a virtually impossible enemy together. Earth's mightiest
-        heroes must come together once again to protect the world from global
-        extinction.
-      </p>
+      <p>{movie.overview}</p>
       <div className="title_video">
         <span>VIDEOS&PHOTOS</span>
         <a href="#photos">All 5 Videos & 245 Photos </a>

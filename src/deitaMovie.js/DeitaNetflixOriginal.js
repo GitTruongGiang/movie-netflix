@@ -11,7 +11,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Overviews from "./overviews/Overviews";
 
@@ -26,11 +25,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -69,7 +64,8 @@ function DeitaNetflixOriginal({ fetchUrl }) {
   return (
     <div className="deita_container">
       {movies.map((movie) => {
-        if (movie.id == params.id) {
+        if (movie.id === Number(params.id)) {
+          console.log(movie);
           return (
             <div key={movie.id}>
               <div
@@ -182,7 +178,7 @@ function DeitaNetflixOriginal({ fetchUrl }) {
                             </Tabs>
                           </Box>
                           <TabPanel value={value} index={0}>
-                            <Overviews />
+                            <Overviews movie={movie} />
                           </TabPanel>
                           <TabPanel value={value} index={1}>
                             <Overviews />

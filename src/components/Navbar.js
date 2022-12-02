@@ -8,6 +8,7 @@ import {
   Container,
   SpeedDial,
   SpeedDialAction,
+  TextField,
   Typography,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -16,7 +17,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import HomeIcon from "@mui/icons-material/Home";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 const actions = [
@@ -25,20 +26,43 @@ const actions = [
   { icon: <ShareIcon />, name: "Share" },
 ];
 
+const styles = {
+  fontSize: "14px",
+  outline: "none",
+  border: "1px solid #fff",
+  cursor: "pointer",
+  width: 0,
+  padding: "10px",
+  opacity: 0,
+  backgroundColor: " #222",
+  transition: "0.3s ease-in",
+  color: "white",
+  ":focus": {
+    paddingLeft: "20px",
+    width: "300px",
+    cursor: "pointer",
+    opacity: 1,
+    borderRadius: "6px",
+  },
+};
+
 function Navbar() {
   const auth = useAuth();
   const [scrolly] = useScrolly();
   let navigate = useNavigate();
   const [keywords, setKeywords] = useState("");
-  function handleChangeMovie(e) {
+  const params = useParams();
+  console.log(params);
+  const handleChangeMovie = async (e) => {
     let keyword = e.target.value;
-    setKeywords(keyword);
-    if (keyword.length > 0) {
-      navigate(`/search?keywords=${keywords.trim()}`);
+    if (keyword) {
+      navigate(`/search?keywords=${keyword.trim()}`);
+      setKeywords(keyword);
     } else {
-      navigate("/");
+      await navigate("/");
+      setKeywords("");
     }
-  }
+  };
 
   function nextHome() {
     navigate("/");
@@ -63,9 +87,10 @@ function Navbar() {
             <SearchIcon className="iconsearch" />
             <input
               type="text"
-              name=""
-              id=""
+              name="search"
+              id="search"
               placeholder="Search"
+              autoComplete="off"
               className="input"
               value={keywords}
               onChange={handleChangeMovie}

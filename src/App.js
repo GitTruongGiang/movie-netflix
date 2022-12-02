@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import requets from "./app/resquets";
 import Footer from "./components/Footer";
@@ -12,11 +12,14 @@ import DeitaNetflixOriginal from "./deitaMovie.js/DeitaNetflixOriginal";
 import DeitaRomance from "./deitaMovie.js/DeitaRomance";
 import DeitaTopRated from "./deitaMovie.js/DeitaTopRated";
 import DeitaTrending from "./deitaMovie.js/DeitaTrending";
+import MovieSearch from "./deitaMovieSearch/MovieSearch";
+import useAuth from "./hooks/useAuth";
 import Layouts from "./layouts/Layouts";
 import LoginForm from "./pages/LoginForm";
 import Search from "./search/Search";
 
 function App() {
+  const auth = useAuth();
   return (
     <div className="container">
       <AuthProvider>
@@ -63,6 +66,10 @@ function App() {
             element={
               <DeitaDocumentaires fetchUrl={requets.fetchDocumentaires} />
             }
+          />
+          <Route
+            path="movie/:id"
+            element={<MovieSearch movies={auth.movies} />}
           />
         </Routes>
         <Footer />

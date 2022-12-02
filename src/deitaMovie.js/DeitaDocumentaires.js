@@ -26,11 +26,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -70,7 +66,7 @@ function DeitaDocumentaires({ fetchUrl }) {
   return (
     <div className="deita_container">
       {movies.map((movie) => {
-        if (movie.id == params.id) {
+        if (movie.id === Number(params.id)) {
           return (
             <div key={movie.id}>
               <div
@@ -183,7 +179,7 @@ function DeitaDocumentaires({ fetchUrl }) {
                             </Tabs>
                           </Box>
                           <TabPanel value={value} index={0}>
-                            <Overviews />
+                            <Overviews movie={movie} />
                           </TabPanel>
                           <TabPanel value={value} index={1}>
                             <Overviews />

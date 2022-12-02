@@ -976,3 +976,6 @@ body {
     font-size: 7px;
   }
 }
+.container_1 .text_1 .container_2 .text_2 {
+  color: red;
+}

@@ -37,7 +37,6 @@ function ContentNetflix({ fetchUrl, title }) {
       try {
         const requets = await instance.get(fetchUrl);
         setMovies(requets.data.results);
-        console.log(requets.data.results);
         return requets;
       } catch (error) {
         setError(error.message);
